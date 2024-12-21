@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.util.Date
 
 
 private const val TAG = "CrimeListFragment"
@@ -55,6 +57,7 @@ class CrimeListFragment : Fragment() {
     private inner class CrimeHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
         private lateinit var crime: Crime
 
+        private val solvedImageView: ImageView = itemView.findViewById(R.id.crime_solved)
         private val titleTextView: TextView = itemView.findViewById(R.id.crime_title)
         private val dateTextView: TextView = itemView.findViewById(R.id.crime_date)
 
@@ -65,14 +68,18 @@ class CrimeListFragment : Fragment() {
         fun bind(crime: Crime) {
             this.crime = crime
             titleTextView.text = crime.title
-            dateTextView.text = crime.date.toString()
+            dateTextView.text = crime.date
+            solvedImageView.visibility = if (crime.isSolved){
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
         }
 
         override fun onClick(v: View) {
             Toast.makeText(itemView.context, "${crime.title} pressed!", Toast.LENGTH_SHORT).show()
         }
     }
-
 
     private inner class CrimeAdapter(var crimes: List<Crime>)
         : RecyclerView.Adapter<CrimeHolder>(){
