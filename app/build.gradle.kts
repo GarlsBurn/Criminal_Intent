@@ -5,8 +5,7 @@ plugins {
 
 android {
     namespace = "com.bignerdranch.android.criminalintent"
-    compileSdk = 34
-
+    compileSdk = 35
     defaultConfig {
         applicationId = "com.bignerdranch.android.criminalintent"
         minSdk = 26
@@ -42,7 +41,15 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.1")
+    implementation ("androidx.lifecycle:lifecycle-common-java8:2.6.1")
+    implementation("androidx.recyclerview:recyclerview:1.2.1")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
 }
