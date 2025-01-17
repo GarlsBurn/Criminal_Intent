@@ -7,6 +7,7 @@ import com.bignerdranch.android.criminalintent.Crime
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.UUID
+import java.util.concurrent.Executors
 
 private const val DATABASE_NAME = "crime-database"
 
@@ -19,12 +20,26 @@ class CrimeRepository private constructor(context: Context) {
     ).build()
 
     private val crimeDao = database.crimeDao()
+    private val executor = Executors.newSingleThreadExecutor()
 
     fun getCrimes(): LiveData<List<Crime>> = crimeDao.getCrimes()
 
     suspend fun getCrime(id: UUID): Crime? = withContext(Dispatchers.IO) {
         crimeDao.getCrimeById(id)
     }
+
+    fun updateCrime(crime: Crime){
+        executor.execute{
+            crimeDao.updateCrime(crime)
+        }
+    }
+
+    fun addCrime(crime:Crime){
+        executor.execute{
+            crimeDao.addCrime(crime)
+        }
+    }
+
     companion object{
         @Volatile
         private var INSTANCE: CrimeRepository? = null

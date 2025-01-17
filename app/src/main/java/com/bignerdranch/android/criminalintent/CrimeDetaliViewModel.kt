@@ -45,5 +45,7 @@ class CrimeDetailViewModel(private val crimeId: UUID) : ViewModel() {
         }
     }
 
-
+    fun saveCrime(crime: Crime){
+        crimeRepository.updateCrime(crime)
+    }
 }
