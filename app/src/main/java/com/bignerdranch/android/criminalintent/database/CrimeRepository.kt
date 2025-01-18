@@ -6,6 +6,7 @@ import androidx.room.Room
 import com.bignerdranch.android.criminalintent.Crime
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.util.Date
 import java.util.UUID
 import java.util.concurrent.Executors
 
@@ -17,7 +18,7 @@ class CrimeRepository private constructor(context: Context) {
         context.applicationContext,
         CrimeDatabase::class.java,
         DATABASE_NAME
-    ).build()
+    ).fallbackToDestructiveMigration().build()
 
     private val crimeDao = database.crimeDao()
     private val executor = Executors.newSingleThreadExecutor()
@@ -27,6 +28,8 @@ class CrimeRepository private constructor(context: Context) {
     suspend fun getCrime(id: UUID): Crime? = withContext(Dispatchers.IO) {
         crimeDao.getCrimeById(id)
     }
+
+
 
     fun updateCrime(crime: Crime){
         executor.execute{
@@ -54,5 +57,6 @@ class CrimeRepository private constructor(context: Context) {
             return INSTANCE ?:
             throw IllegalStateException("CrimeRepository must be initialized")
         }
+
     }
 }

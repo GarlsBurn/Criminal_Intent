@@ -9,5 +9,5 @@ import java.util.UUID
 @Entity
 data class Crime(@PrimaryKey val id: UUID = UUID.randomUUID(),
                  var title: String = "",
-                 var date: String = SimpleDateFormat("EEEE, MMM dd, yyyy", Locale.ENGLISH).format(Date()),
+                 var date: Date = Date(),// SimpleDateFormat("EEEE, MMM dd, yyyy", Locale.ENGLISH).format(Date()),
                  var isSolved: Boolean = false)
