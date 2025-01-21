@@ -25,13 +25,32 @@
         android:layout_height="wrap_content"
         android:text="@string/crime_details_label"
         />
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
     <Button
         android:id="@+id/crime_date"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:text="Среда 11:56 МСК 18.12.2024"
+        android:layout_weight="1"
+        tools:text="Среда 18.12.2024"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
         />
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:id="@+id/crime_time"
+        android:text="11:56 МСК"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        />
+
+</LinearLayout>
+
 
     <CheckBox
         android:id="@+id/crime_solved"

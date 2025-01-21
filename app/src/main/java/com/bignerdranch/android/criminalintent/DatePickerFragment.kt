@@ -13,21 +13,22 @@ private const val ARD_DATE = "date"
 
 class DatePickerFragment: DialogFragment() {
 
-    val dateListener = DatePickerDialog.OnDateSetListener{
-        _: DatePicker, year: Int, month: Int, day: Int ->
-
-        val resultDate: Date = GregorianCalendar(year, month, day).time
-
-        targetFragment?.let {
-            fragment -> (fragment as Callbacks).onDateSelected(resultDate)
-        }
-    }
-
     interface  Callbacks {
         fun onDateSelected(date: Date)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog{
+
+        val dateListener = DatePickerDialog.OnDateSetListener{
+                _: DatePicker, year: Int, month: Int, day: Int ->
+
+            val resultDate: Date = GregorianCalendar(year, month, day).time
+
+            targetFragment?.let {
+                    fragment -> (fragment as Callbacks).onDateSelected(resultDate)
+            }
+        }
+
         val calendar = Calendar.getInstance()
         val date = arguments?.getSerializable(ARD_DATE) as Date
         calendar.time = date

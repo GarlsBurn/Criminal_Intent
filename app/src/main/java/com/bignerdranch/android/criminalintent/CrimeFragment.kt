@@ -20,14 +20,16 @@ import java.util.UUID
 private const val ARG_CRIME_ID = "crime_id"
 private const val TAG = "CrimeFragment"
 private const val DIALOG_DATE = "DialogDate"
+private const val DIALOG_TIME = "DialogTime"
 private const val REQUEST_DATE = 0
 
-class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
+class CrimeFragment: Fragment(), DatePickerFragment.Callbacks, TimePickerFragment.Callbacks {
 
     private lateinit var crime: Crime
     private lateinit var titleField: EditText
     private lateinit var dateButton: Button
     private lateinit var solvedCheckBox: CheckBox
+    private lateinit var timeBtn: Button
 
     private lateinit var crimeDetailViewModel: CrimeDetailViewModel
 
@@ -52,6 +54,7 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
         titleField = view.findViewById(R.id.crime_title) as EditText
         dateButton = view.findViewById(R.id.crime_date) as Button
         solvedCheckBox = view.findViewById(R.id.crime_solved) as CheckBox
+        timeBtn = view.findViewById(R.id.crime_time) as Button
 
 
         return view
@@ -94,6 +97,13 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
                 setTargetFragment(this@CrimeFragment, REQUEST_DATE)
                 show(this@CrimeFragment.requireFragmentManager(), DIALOG_DATE)
             }
+
+            timeBtn.setOnClickListener{
+                TimePickerFragment.newInstance(crime.date).apply {
+                    setTargetFragment(this@CrimeFragment, REQUEST_DATE)
+                    show(this@CrimeFragment.requireFragmentManager(), DIALOG_TIME)
+                }
+            }
         }
     }
 
@@ -115,6 +125,11 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
 
     override fun onDateSelected(date: Date) {
         crime.date = date
+        updateUI()
+    }
+
+    override fun onTimeSelected(time: Date) {
+        crime.date = time
         updateUI()
     }
 
