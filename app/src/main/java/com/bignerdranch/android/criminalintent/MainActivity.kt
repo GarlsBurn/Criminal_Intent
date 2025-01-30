@@ -6,7 +6,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.bignerdranch.android.criminalintent.database.CrimeRepository
 import java.util.UUID
 
 
@@ -16,7 +15,6 @@ class MainActivity : AppCompatActivity(),
     CrimeListFragment.Callbacks {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
-            CrimeRepository.initialize(this)
             enableEdgeToEdge()
             setContentView(R.layout.activity_main)
 
