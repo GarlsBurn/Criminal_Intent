@@ -8,7 +8,7 @@
 
 <Space
     android:layout_width="wrap_content"
-    android:layout_height="55dp"/>
+    android:layout_height="60dp"/>
 
 
     <TextView
@@ -63,6 +63,19 @@
         android:layout_height="wrap_content"
         android:text="@string/crime_solved_label"
         />
+
+    <Button
+        android:id="@+id/crime_suspect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/crime_suspect_text"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/crime_report"
+        android:text="@string/crime_report_text"/>
 
 
 </LinearLayout>
