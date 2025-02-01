@@ -11,4 +11,7 @@ data class Crime(@PrimaryKey val id: UUID = UUID.randomUUID(),
                  var title: String = "",
                  var date: Date = Date(),// SimpleDateFormat("EEEE, MMM dd, yyyy", Locale.ENGLISH).format(Date()),
                  var isSolved: Boolean = false,
-                 var suspect: String = "")
+                 var suspect: String = ""){
+    val photoFileName
+        get() = "IMG_$id.jpg"
+}

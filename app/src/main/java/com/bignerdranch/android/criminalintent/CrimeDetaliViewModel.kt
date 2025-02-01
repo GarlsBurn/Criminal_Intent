@@ -10,6 +10,7 @@ import com.bignerdranch.android.criminalintent.database.CrimeRepository
 import java.util.UUID
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import java.io.File
 
 class CrimeDetailViewModel(private val crimeId: UUID) : ViewModel() {
     private val crimeRepository = CrimeRepository.get()
@@ -47,5 +48,9 @@ class CrimeDetailViewModel(private val crimeId: UUID) : ViewModel() {
 
     fun saveCrime(crime: Crime){
         crimeRepository.updateCrime(crime)
+    }
+
+    fun getPhotoFile(crime: Crime): File {
+        return crimeRepository.getPhotoFile(crime)
     }
 }
